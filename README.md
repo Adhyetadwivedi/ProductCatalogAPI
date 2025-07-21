@@ -1,7 +1,7 @@
-README.md
-ProductApi - Product Management System
+# ProductApi - Product Management System
 A RESTful API built with ASP.NET Core for managing products with stock control functionality. This API supports full CRUD operations and provides endpoints for stock management in a distributed environment.
-🚀 Features
+
+## 🚀 Features
 
 Complete CRUD Operations for products
 Stock Management with increment/decrement functionality
@@ -12,17 +12,18 @@ Clean Architecture with Repository and Service patterns
 Async/Await patterns throughout
 Comprehensive Unit Tests with xUnit
 
-🛠 Technologies Used
+## 🛠 Technologies Used
 
-.NET 8.0
-ASP.NET Core Web API
-Entity Framework Core
-SQL Server
-Swagger/OpenAPI
-xUnit (Testing)
-Moq (Mocking)
+ - .NET 8.0
+ - ASP.NET Core Web API
+ - Entity Framework Core
+ - SQL Server
+ - Swagger/OpenAPI
+ - xUnit (Testing)
+ - Moq (Mocking)
 
-📁 Project Structure
+## 📁 Project Structure
+```
 ProductApi/
 ├── Controllers/
 │   └── ProductsController.cs          # API endpoints
@@ -44,45 +45,50 @@ ProductApi/
 │   └── ProductIdGenerator.cs          # Unique ID generation
 ├── Program.cs                         # Application entry point
 └── appsettings.json                   # Configuration
-🔧 Setup Instructions
-Prerequisites
 
-.NET 8.0 SDK
-SQL Server (Local DB or Express)
-Visual Studio 2022 or VS Code
+```
+## 🔧 Setup Instructions
+### Prerequisites
 
-Installation Steps
+- .NET 8.0 SDK
+ - SQL Server (Local DB or Express)
+ - Visual Studio 2022 or VS Code
 
-Clone the repository
-bashgit clone <repository-url>
-cd ProductApi
+### Installation Steps
 
-Update Connection String
+- Clone the repository
+- bashgit clone <repository-url>
+ - cd ProductApi
+
+ - Update Connection String
 Update the connection string in appsettings.json to match your SQL Server instance:
+```
 json{
   "ConnectionStrings": {
     "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=ProductDb;Trusted_Connection=true;MultipleActiveResultSets=true;"
   }
 }
+```
 
-Install Dependencies
-bashdotnet restore
+## Install Dependencies
+- bashdotnet restore
 
-Create Database and Run Migrations
+## Create Database and Run Migrations
 bashdotnet ef database update
 
-Run the Application
+## Run the Application
 bashdotnet run
 
-Access Swagger UI
+## Access Swagger UI
 Navigate to https://localhost:5001/swagger to explore the API endpoints.
 
-📋 API Endpoints
-Product Management
-MethodEndpointDescriptionGET/productsGet all productsGET/products/{id}Get product by IDPOST/productsCreate new productPUT/products/{id}Update existing productDELETE/products/{id}Delete product
-Stock Management
-MethodEndpointDescriptionPUT/products/decrement-stock/{id}/{quantity}Decrease product stockPUT/products/add-to-stock/{id}/{quantity}Increase product stock
-Sample Request/Response
+## 📋 API Endpoints
+- Product Management
+- MethodEndpointDescriptionGET/productsGet all productsGET/products/{id}Get product by IDPOST/productsCreate new productPUT/products/{id}Update existing productDELETE/products/{id}Delete product
+- Stock Management
+- MethodEndpointDescriptionPUT/products/decrement-stock/{id}/{quantity}Decrease product stockPUT/products/add-to-stock/{id}/{quantity}Increase product stock
+  
+**Sample Request/Response**
 Create Product (POST /products)
 Request Body:
 json{
@@ -100,64 +106,66 @@ json{
   "price": 1299.99,
   "createdAt": "2025-01-15T10:30:00Z"
 }
-🧪 Running Tests
+## 🧪 Running Tests
 Run All Tests
 bashdotnet test
 Run Tests with Coverage
 bashdotnet test --collect:"XPlat Code Coverage"
 Test Project Structure
+```
 ProductApi.Tests/
 ├── Services/
 │   ├── ProductServiceTests.cs
 │   └── ProductIdGeneratorTests.cs
 └── Controllers/
     └── ProductsControllerTests.cs
-🏗 Architecture & Design Patterns
+```
+## 🏗 Architecture & Design Patterns
 Clean Architecture
 
-Controllers: Handle HTTP requests and responses
-Services: Contains business logic
-Repositories: Data access layer
-Models: Domain entities
-DTOs: Data transfer objects
+- Controllers: Handle HTTP requests and responses
+ - Services: Contains business logic
+- Repositories: Data access layer
+- Models: Domain entities
+- DTOs: Data transfer objects
 
-Design Patterns Used
+## Design Patterns Used
 
-Repository Pattern: Abstracts data access logic
-Dependency Injection: Promotes loose coupling
-Service Layer Pattern: Encapsulates business logic
-Factory Pattern: Used in ID generation
+- Repository Pattern: Abstracts data access logic
+- Dependency Injection: Promotes loose coupling
+ - Service Layer Pattern: Encapsulates business logic
+ - Factory Pattern: Used in ID generation
 
-🔒 Key Features
-Distributed ID Generation
+## 🔒 Key Features
+### Distributed ID Generation
 
-Generates unique 6-digit IDs starting from 100001
-Thread-safe using SemaphoreSlim
-Handles concurrent requests across multiple instances
-Stores last generated ID in database for persistence
+- Generates unique 6-digit IDs starting from 100001
+- Thread-safe using SemaphoreSlim
+- Handles concurrent requests across multiple instances
+- Stores last generated ID in database for persistence
 
-Stock Management
+## Stock Management
 
-Prevents overselling with validation
-Atomic operations for stock updates
-Thread-safe increment/decrement operations
+- Prevents overselling with validation
+- Atomic operations for stock updates
+- Thread-safe increment/decrement operations
 
-Error Handling
+## Error Handling
 
-Proper HTTP status codes
-Validation for business rules
-Graceful handling of edge cases
+- Proper HTTP status codes
+- Validation for business rules
+- Graceful handling of edge cases
 
-🚀 Production Considerations
+## 🚀 Production Considerations
 This API is designed with production scalability in mind:
 
-Async Operations: All database operations are asynchronous
-Thread Safety: Critical sections protected with semaphore
-Clean Architecture: Easy to maintain and extend
-Testable Code: Comprehensive unit test coverage
-Logging Ready: Structured for adding logging middleware
+- Async Operations: All database operations are asynchronous
+- Thread Safety: Critical sections protected with semaphore
+- Clean Architecture: Easy to maintain and extend
+- Testable Code: Comprehensive unit test coverage
+- Logging Ready: Structured for adding logging middleware
 
-📝 Database Schema
+## 📝 Database Schema
 Products Table
 ColumnTypeDescriptionProductIdstring (PK)Unique 6-digit identifierNamestringProduct nameDescriptionstringProduct descriptionStockAvailableintCurrent stock quantityPricedecimal(18,2)Product priceCreatedAtdatetimeCreation timestamp
 ProductIdTrackers Table
