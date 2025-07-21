@@ -1,6 +1,5 @@
 # Ignore Visual Studio user-specific and temporary files
 .vs/
-*.user
 *.suo
 *.userosscache
 *.sln.docstates

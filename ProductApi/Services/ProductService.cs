@@ -11,11 +11,13 @@ namespace ProductApi.Services
     {
         private readonly IProductRepository _repo;
         private readonly IProductIdGenerator _idGenerator;
+        private readonly ILogger<ProductService> _logger;
 
-        public ProductService(IProductRepository repo, IProductIdGenerator idGenerator)
+        public ProductService(IProductRepository repo, IProductIdGenerator idGenerator, ILogger<ProductService> logger)
         {
             _repo = repo;
             _idGenerator = idGenerator;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<Product>> GetAllAsync() => await _repo.GetAllAsync();
