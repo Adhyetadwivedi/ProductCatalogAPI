@@ -51,17 +51,18 @@ ProductApi/
 ### Prerequisites
 
 - .NET 8.0 SDK
- - SQL Server (Local DB or Express)
- - Visual Studio 2022 or VS Code
+- SQL Server (Local DB or Express)
+- Visual Studio 2022 or VS Code
 
 ### Installation Steps
 
-- Clone the repository
-- bashgit clone <repository-url>
- - cd ProductApi
+**1. Clone the repository**
+```
+bashgit clone <repository-url>
+cd ProductApi
+```
 
- - Update Connection String
-Update the connection string in appsettings.json to match your SQL Server instance:
+**2. Update Connection String** Update the connection string in **appsettings.json** to match your SQL Server instance:
 ```
 json{
   "ConnectionStrings": {
@@ -70,26 +71,47 @@ json{
 }
 ```
 
-## Install Dependencies
-- bashdotnet restore
+**3. Install Dependencies**
+```
+bashdotnet restore
+```
 
-## Create Database and Run Migrations
+**4. Create Database and Run Migrations**
+```
 bashdotnet ef database update
+```
 
-## Run the Application
+**5. Run the Application**
+```
 bashdotnet run
+```
 
-## Access Swagger UI
-Navigate to https://localhost:5001/swagger to explore the API endpoints.
+**6. Access Swagger UI**
+```
+Navigate to **https://localhost:5001/swagger ** to explore the API endpoints.
+```
 
 ## 📋 API Endpoints
-- Product Management
-- MethodEndpointDescriptionGET/productsGet all productsGET/products/{id}Get product by IDPOST/productsCreate new productPUT/products/{id}Update existing productDELETE/products/{id}Delete product
-- Stock Management
-- MethodEndpointDescriptionPUT/products/decrement-stock/{id}/{quantity}Decrease product stockPUT/products/add-to-stock/{id}/{quantity}Increase product stock
+**Product Management**
+```
+Method  Endpoint        Description
+GET     /productsGet    all products
+GET     /products/{id}  Get product by ID
+POST    /products       Create new product
+PUT     /products/{id}  Update existing product
+DELETE  /products/{id}  Delete product
+```
+
+**Stock Management**
+```
+Method  Endpoint                                        Description
+PUT     /products/decrement-stock/{id}/{quantity}       Decrease product stock
+PUT     /products/add-to-stock/{id}/{quantity}Increase  product stock
+```
   
-**Sample Request/Response**
-Create Product (POST /products)
+**Sample Request/Response** <br>
+**Create Product (POST /products)**
+```
 Request Body:
 json{
   "name": "Gaming Laptop",
@@ -97,6 +119,8 @@ json{
   "stockAvailable": 25,
   "price": 1299.99
 }
+```
+```
 Response:
 json{
   "productId": "100001",
@@ -106,12 +130,20 @@ json{
   "price": 1299.99,
   "createdAt": "2025-01-15T10:30:00Z"
 }
+```
+
 ## 🧪 Running Tests
-Run All Tests
+**Run All Tests**
+```
 bashdotnet test
-Run Tests with Coverage
+```
+
+**Run Tests with Coverage**
+```
 bashdotnet test --collect:"XPlat Code Coverage"
-Test Project Structure
+```
+
+**Test Project Structure**
 ```
 ProductApi.Tests/
 ├── Services/
@@ -120,11 +152,12 @@ ProductApi.Tests/
 └── Controllers/
     └── ProductsControllerTests.cs
 ```
+
 ## 🏗 Architecture & Design Patterns
-Clean Architecture
+**Clean Architecture**
 
 - Controllers: Handle HTTP requests and responses
- - Services: Contains business logic
+- Services: Contains business logic
 - Repositories: Data access layer
 - Models: Domain entities
 - DTOs: Data transfer objects
@@ -133,8 +166,8 @@ Clean Architecture
 
 - Repository Pattern: Abstracts data access logic
 - Dependency Injection: Promotes loose coupling
- - Service Layer Pattern: Encapsulates business logic
- - Factory Pattern: Used in ID generation
+- Service Layer Pattern: Encapsulates business logic
+- Factory Pattern: Used in ID generation
 
 ## 🔒 Key Features
 ### Distributed ID Generation
@@ -144,13 +177,13 @@ Clean Architecture
 - Handles concurrent requests across multiple instances
 - Stores last generated ID in database for persistence
 
-## Stock Management
+### Stock Management
 
 - Prevents overselling with validation
 - Atomic operations for stock updates
 - Thread-safe increment/decrement operations
 
-## Error Handling
+### Error Handling
 
 - Proper HTTP status codes
 - Validation for business rules
@@ -166,7 +199,21 @@ This API is designed with production scalability in mind:
 - Logging Ready: Structured for adding logging middleware
 
 ## 📝 Database Schema
-Products Table
-ColumnTypeDescriptionProductIdstring (PK)Unique 6-digit identifierNamestringProduct nameDescriptionstringProduct descriptionStockAvailableintCurrent stock quantityPricedecimal(18,2)Product priceCreatedAtdatetimeCreation timestamp
-ProductIdTrackers Table
-ColumnTypeDescriptionIdint (PK)Auto-increment primary keyLastGeneratedIdintLast generated product ID
+**Products Table**
+```
+Column          Type              Description
+ProductId       string (PK)       Unique 6-digit identifier
+Name            string            Product name
+Description     string            Product description
+StockAvailable  int               Current stock quantity
+Price           decimal(18,2)     Product price
+CreatedAt       datetimeCreation  timestamp
+
+```
+
+**ProductIdTrackers Table**
+```
+Column           Type      Description
+Id               int (PK)  Auto-increment primary key
+LastGeneratedId  int       Last generated product ID
+```
